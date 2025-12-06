@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>M3U8 Converter</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Poppins, sans-serif;
+        background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .card {
+        width: 90%;
+        max-width: 500px;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 30px;
+        border-radius: 20px;
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 25px rgba(0, 255, 200, 0.2);
+        animation: fadeIn 0.7s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(15px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+    }
+
+    input {
+        width: 100%;
+        padding: 14px;
+        border-radius: 12px;
+        border: none;
+        outline: none;
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        font-size: 15px;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 15px;
+        padding: 14px;
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #00ffc8, #00bfff);
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        color: #000;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 20px #00ffc8;
+    }
+
+    #output {
+        margin-top: 20px;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        word-break: break-all;
+        font-size: 14px;
+        display: none;
+    }
+
+    .actionBtn {
+        margin-top: 10px;
+        background: transparent;
+        border: 1px solid #00ffc8;
+        padding: 10px;
+        border-radius: 10px;
+        color: #00ffc8;
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+    }
+
+    .actionBtn:hover {
+        background: #00ffc8;
+        color: #000;
+    }
+
+    a {
+        color: #00ffc8;
+        text-decoration: none;
+    }
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h2>M3U8 URL Converter</h2>
+
+    <input id="inputUrl" placeholder="Paste your edu-vibe URL..." />
+
+    <button onclick="convert()">Convert</button>
+
+    <div id="output"></div>
+
+    <button class="actionBtn" onclick="copyText()" id="copyBtn" style="display:none;">Copy URL</button>
+    <button class="actionBtn" onclick="visitLink()" id="visitBtn" style="display:none;">Visit URL</button>
+</div>
+
+<script>
+let finalURL = "";
+
+function convert() {
+    let url = document.getElementById("inputUrl").value.trim();
+
+    let replaced = url.replace(
+        "https://edu-vibe-nt.vercel.app/private/myProfile/play/",
+        "https://edurise-network.vercel.app/next-toppers.html?url="
+    );
+
+    finalURL = replaced;
+
+    document.getElementById("output").style.display = "block";
+    document.getElementById("output").innerHTML =
+        `Final URL:<br><a href="${replaced}" target="_blank">${replaced}</a>`;
+
+    document.getElementById("copyBtn").style.display = "block";
+    document.getElementById("visitBtn").style.display = "block";
+}
+
+function copyText() {
+    navigator.clipboard.writeText(finalURL);
+    alert("URL Copied!");
+}
+
+function visitLink() {
+    window.open(finalURL, "_blank");
+}
+</script>
+
+</body>
+</html>
